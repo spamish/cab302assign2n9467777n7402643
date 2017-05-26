@@ -3,6 +3,9 @@ package asgn2Restaurant;
 import java.util.ArrayList;
 
 import asgn2Customers.Customer;
+import asgn2Exceptions.CustomerException;
+import asgn2Exceptions.LogHandlerException;
+import asgn2Exceptions.PizzaException;
 import asgn2Pizzas.Pizza;
 
 /**
@@ -14,7 +17,7 @@ import asgn2Pizzas.Pizza;
  *  Any exceptions raised by one of the methods called by this class should be passed to asgn2GUIs.PizzaGUI so that it can be shown to
  *  the user.
  * 
- * @author Person A and Person B
+ * @author Adam Bona and Samuel Janetzki
  *
  */
 public class PizzaRestaurant {
@@ -50,7 +53,7 @@ public class PizzaRestaurant {
 	 * @throws LogHandlerException If there was a problem with the log file not related to the semantic errors above (passed by another class).
      *
 	 */
-	public boolean processLog(String filename) throws CustomerException, PizzaException, LogHandlerException{
+	public boolean processLog(String filename) throws CustomerException, PizzaException, LogHandlerException {
 		// TO DO
 	}
 
@@ -60,7 +63,7 @@ public class PizzaRestaurant {
 	 * @return The Customer object located at the specified index.
 	 * @throws CustomerException if index is invalid.
 	 */
-	public Customer getCustomerByIndex(int index) throws CustomerException{
+	public Customer getCustomerByIndex(int index) throws CustomerException {
 		// TO DO
 	}
 	
@@ -70,7 +73,7 @@ public class PizzaRestaurant {
 	 * @return The Pizza object located at the specified index.
 	 * @throws PizzaException if index is invalid.
 	 */	
-	public Pizza getPizzaByIndex(int index) throws PizzaException{
+	public Pizza getPizzaByIndex(int index) throws PizzaException {
 		// TO DO
 	}
 	
@@ -80,7 +83,7 @@ public class PizzaRestaurant {
 	 * 
 	 * @return the number of objects contained in the pizzas field.
 	 */
-	public int getNumPizzaOrders(){
+	public int getNumPizzaOrders() {
 		// TO DO
 	}
 
@@ -90,7 +93,7 @@ public class PizzaRestaurant {
 	 * 
 	 * @return the number of objects contained in the customers field.
 	 */
-	public int getNumCustomerOrders(){
+	public int getNumCustomerOrders() {
 		// TO DO
 	}
 
@@ -101,7 +104,7 @@ public class PizzaRestaurant {
 	 * 
 	 * @return the total delivery distance for all Customers objects in the customers field.
 	 */
-	public double getTotalDeliveryDistance(){
+	public double getTotalDeliveryDistance() {
 		// TO DO
 	}
 
@@ -110,7 +113,7 @@ public class PizzaRestaurant {
 	 * 
 	 * @return the total profit for all of the Pizza objects in the pizzas field.
 	 */	
-	public double getTotalProfit(){
+	public double getTotalProfit() {
 		// TO DO
 	}
 	
@@ -120,7 +123,7 @@ public class PizzaRestaurant {
 	 * <P> PRE: True
 	 * <P> POST:  The pizzas and customers fields are set to their initial empty states
 	 */
-	public void resetDetails(){
+	public void resetDetails() {
 		// TO DO
 	}
 

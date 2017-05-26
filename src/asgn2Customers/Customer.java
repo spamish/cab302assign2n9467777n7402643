@@ -8,7 +8,7 @@ import asgn2Exceptions.CustomerException;
  *  the abstract method getDeliveryDistance. A description of the class's
  * fields and their constraints is provided in Section 5.2 of the Assignment Specification.  
  * 
- * @author Person B
+ * @author Samuel Janetzki
 */
 public abstract class Customer {
 
@@ -30,7 +30,7 @@ public abstract class Customer {
 	 * @throws CustomerException if supplied parameters are invalid 
 	 * 
 	 */
-	public Customer(String name, String mobileNumber, int locationX, int locationY, String type) throws CustomerException{
+	public Customer(String name, String mobileNumber, int locationX, int locationY, String type) throws CustomerException {
 		// TO DO
 	}
 	
@@ -38,7 +38,7 @@ public abstract class Customer {
 	 * Returns the Customer's name.
 	 * @return The Customer's name.
 	 */
-	public final String getName(){
+	public final String getName() {
 		// TO DO
 	}
 	
@@ -46,7 +46,7 @@ public abstract class Customer {
 	 * Returns the Customer's mobile number.
 	 * @return The Customer's mobile number.
 	 */
-	public final String getMobileNumber(){
+	public final String getMobileNumber() {
 		// TO DO
 	}
 
@@ -55,7 +55,7 @@ public abstract class Customer {
 	 * The valid alternatives are listed in Section 5.2 of the Assignment Specification. 
 	 * @return A human understandable description of the Customer's type.
 	 */
-	public final String getCustomerType(){
+	public final String getCustomerType() {
 		// TO DO
 	}
 	
@@ -64,7 +64,7 @@ public abstract class Customer {
 	 * that the Customer is located relative to the Pizza Palace restaurant. 
 	 * @return The Customer's X location
 	 */
-	public final int getLocationX(){
+	public final int getLocationX() {
 		// TO DO
 	}
 
@@ -73,7 +73,7 @@ public abstract class Customer {
 	 * that the Customer is located relative to the Pizza Palace restaurant. 
 	 * @return The Customer's Y location
 	 */
-	public final int getLocationY(){
+	public final int getLocationY() {
 		// TO DO
 	}
 
@@ -95,7 +95,7 @@ public abstract class Customer {
 	 * getName(),getMobileNumber(),getLocationX(),getLocationY(),getCustomerType().
 	 */
 	@Override
-	public boolean equals(Object other){
+	public boolean equals(Object other) {
 		Customer otherCustomer = (Customer) other;
 
 		return ( (this.getName().equals(otherCustomer.getName()))  &&

@@ -9,7 +9,7 @@ import java.time.LocalTime;
  * Each of these subclasses have a different set of toppings. A description of the class's fields
  * and their constraints is provided in Section 5.1 of the Assignment Specification. 
  * 
- * @author Person A
+ * @author Adam Bona
  *
  */
 public abstract class Pizza  {
@@ -31,7 +31,7 @@ public abstract class Pizza  {
 	 * @throws PizzaException if supplied parameters are invalid 
 	 * 
 	 */
-	public Pizza(int quantity, LocalTime orderTime, LocalTime deliveryTime, String type, double price) throws PizzaException{
+	public Pizza(int quantity, LocalTime orderTime, LocalTime deliveryTime, String type, double price) throws PizzaException {
 		// TO DO	
 	}
 
@@ -41,7 +41,7 @@ public abstract class Pizza  {
      * <P> PRE: TRUE
 	 * <P> POST: The cost field is set to sum of the Pizzas's toppings
 	 */
-	public final void calculateCostPerPizza(){
+	public final void calculateCostPerPizza() {
 		// TO DO
 	}
 	
@@ -49,7 +49,7 @@ public abstract class Pizza  {
 	 * Returns the amount that an individual pizza costs to make.
 	 * @return The amount that an individual pizza costs to make.
 	 */
-	public final double getCostPerPizza(){
+	public final double getCostPerPizza() {
 		// TO DO
 	}
 
@@ -57,7 +57,7 @@ public abstract class Pizza  {
 	 * Returns the amount that an individual pizza is sold to the customer.
 	 * @return The amount that an individual pizza is sold to the customer.
 	 */
-	public final double getPricePerPizza(){
+	public final double getPricePerPizza() {
 		// TO DO
 	}
 
@@ -65,7 +65,7 @@ public abstract class Pizza  {
 	 * Returns the amount that the entire order costs to make, taking into account the type and quantity of pizzas. 
 	 * @return The amount that the entire order costs to make, taking into account the type and quantity of pizzas. 
 	 */
-	public final double getOrderCost(){
+	public final double getOrderCost() {
 		// TO DO
 	}
 	
@@ -73,7 +73,7 @@ public abstract class Pizza  {
 	 * Returns the amount that the entire order is sold to the customer, taking into account the type and quantity of pizzas. 
 	 * @return The amount that the entire order is sold to the customer, taking into account the type and quantity of pizzas. 
 	 */
-	public final double getOrderPrice(){
+	public final double getOrderPrice() {
 		// TO DO
 	}
 	
@@ -82,7 +82,7 @@ public abstract class Pizza  {
 	 * Returns the profit made by the restaurant on the order which is the order price minus the order cost. 
 	 * @return  Returns the profit made by the restaurant on the order which is the order price minus the order cost.
 	 */
-	public final double getOrderProfit(){
+	public final double getOrderProfit() {
 		// TO DO
 	}
 	
@@ -92,7 +92,7 @@ public abstract class Pizza  {
 	 * @param topping -  A topping as specified in the enumeration PizzaTopping
 	 * @return Returns  true if the instance of Pizza contains the specified topping and false otherwise.
 	 */
-	public final boolean containsTopping(PizzaTopping topping){
+	public final boolean containsTopping(PizzaTopping topping) {
 		// TO DO
 	}
 	
@@ -100,7 +100,7 @@ public abstract class Pizza  {
 	 * Returns the quantity of pizzas ordered. 
 	 * @return the quantity of pizzas ordered. 
 	 */
-	public final int getQuantity(){
+	public final int getQuantity() {
 		// TO DO
 	}
 
@@ -109,7 +109,7 @@ public abstract class Pizza  {
 	 * The valid alternatives are listed in Section 5.1 of the Assignment Specification. 
 	 * @return A human understandable description of the Pizza's type.
 	 */
-	public final String getPizzaType(){
+	public final String getPizzaType() {
 		// TO DO
 	}
 
@@ -125,7 +125,7 @@ public abstract class Pizza  {
 	 *   
 	 */
 	@Override
-	public boolean equals(Object other){
+	public boolean equals(Object other) {
 		Pizza otherPizza = (Pizza) other;
 		return ((this.getCostPerPizza()) == (otherPizza.getCostPerPizza()) &&
 			(this.getOrderCost()) == (otherPizza.getOrderCost())) &&				

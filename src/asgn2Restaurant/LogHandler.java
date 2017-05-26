@@ -14,7 +14,7 @@ import asgn2Pizzas.Pizza;
  * and Customer object - either as an individual Pizza/Customer object or as an
  * ArrayList of Pizza/Customer objects.
  * 
- * @author Person A and Person B
+ * @author Adam Bona and Samuel Janetzki
  *
  */
 public class LogHandler {
@@ -29,7 +29,7 @@ public class LogHandler {
 	 * @throws LogHandlerException If there was a problem with the log file not related to the semantic errors above
 	 * 
 	 */
-	public static ArrayList<Customer> populateCustomerDataset(String filename) throws CustomerException, LogHandlerException{
+	public static ArrayList<Customer> populateCustomerDataset(String filename) throws CustomerException, LogHandlerException {
 		// TO DO
 	}		
 
@@ -41,7 +41,7 @@ public class LogHandler {
 	 * @throws LogHandlerException If there was a problem with the log file not related to the semantic errors above
 	 * 
 	 */
-	public static ArrayList<Pizza> populatePizzaDataset(String filename) throws PizzaException, LogHandlerException{
+	public static ArrayList<Pizza> populatePizzaDataset(String filename) throws PizzaException, LogHandlerException {
 		// TO DO
 	}		
 
@@ -54,7 +54,7 @@ public class LogHandler {
 	 * @throws CustomerException - If the log file contains semantic errors leading that violate the customer constraints listed in Section 5.3 of the Assignment Specification or contain an invalid customer code (passed by another class).
 	 * @throws LogHandlerException - If there was a problem parsing the line from the log file.
 	 */
-	public static Customer createCustomer(String line) throws CustomerException, LogHandlerException{
+	public static Customer createCustomer(String line) throws CustomerException, LogHandlerException {
 		// TO DO
 	}
 	
@@ -66,7 +66,7 @@ public class LogHandler {
 	 * @throws PizzaException If the log file contains semantic errors leading that violate the pizza constraints listed in Section 5.3 of the Assignment Specification or contain an invalid pizza code (passed by another class).
 	 * @throws LogHandlerException - If there was a problem parsing the line from the log file.
 	 */
-	public static Pizza createPizza(String line) throws PizzaException, LogHandlerException{
+	public static Pizza createPizza(String line) throws PizzaException, LogHandlerException {
 		// TO DO		
 	}
 
