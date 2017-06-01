@@ -7,6 +7,9 @@ import java.io.IOException;
 import java.text.DecimalFormat;
 
 import asgn2Customers.Customer;
+import asgn2Exceptions.CustomerException;
+import asgn2Exceptions.LogHandlerException;
+import asgn2Exceptions.PizzaException;
 import asgn2Pizzas.Pizza;
 import asgn2Restaurant.PizzaRestaurant;
 
@@ -27,12 +30,6 @@ import javax.swing.*;
  *
  */
 public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionListener {
-	
-	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 	private PizzaRestaurant restaurant;
 	private JFrame frame;
 	private JMenu menuFile;
@@ -57,8 +54,9 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 	}
 	
 	private JMenuBar createMenuBar() {
-		menuFile = new JMenu("Files");
-		menuDisplay = new JMenu("Displays");
+		JMenuBar bar = new JMenuBar();
+		menuFile     = new JMenu("Files");
+		menuDisplay  = new JMenu("Displays");
 
 		JMenuItem itemLoad = new JMenuItem("Load");
 		itemLoad.addActionListener(this);
@@ -80,7 +78,6 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 		itemCalculations.setActionCommand("calc");
 		menuDisplay.add(itemCalculations);
 		
-		JMenuBar bar = new JMenuBar();
 		bar.add(menuFile);
 		bar.add(menuDisplay);
 		return bar;
@@ -88,27 +85,34 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 
 	@Override
 	public void run() {
-		
+//		restaurant = new PizzaRestaurant();
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent e) {
-		String move = e.getActionCommand();
+	public void actionPerformed(ActionEvent event) {
+		String move = event.getActionCommand();
 		
 		if (move == "load") {
 			JFileChooser chooser = new JFileChooser();
-			File directory = new File(System.getProperty("user.dir") + "/logs");
+			File directory       = new File(System.getProperty("user.dir") + "/logs");
+			
 			chooser.setCurrentDirectory(directory);
 			int response = chooser.showOpenDialog(frame);
 			
 			if (response == JFileChooser.APPROVE_OPTION) {
 				fileData = chooser.getSelectedFile();
-				menuFile.getMenuComponent(0).setEnabled(false);
-				menuFile.getMenuComponent(1).setEnabled(true);
-				menuDisplay.getMenuComponent(0).setEnabled(true);
-				menuDisplay.getMenuComponent(1).setEnabled(true);
-				
 				JOptionPane.showMessageDialog(frame, "Opened " + fileData.getPath());
+				
+//				try {
+//					restaurant.processLog(fileData.getPath());
+					
+					menuFile.getMenuComponent(0).setEnabled(false);
+					menuFile.getMenuComponent(1).setEnabled(true);
+					menuDisplay.getMenuComponent(0).setEnabled(true);
+					menuDisplay.getMenuComponent(1).setEnabled(true);
+//				} catch (CustomerException | PizzaException | LogHandlerException error) {
+//					JOptionPane.showMessageDialog(frame, error.getMessage());
+//				}
 	        }
 		} else if (move == "reset") {
 			fileData = null;
@@ -118,10 +122,22 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 			menuDisplay.getMenuComponent(1).setEnabled(false);
 
 			JOptionPane.showMessageDialog(frame, "Cleared file");
+			
+//			restaurant.resetDetails();
 		} else if (move == "info") {
+//			int index;
+			
 			JOptionPane.showMessageDialog(frame, "Display customer and pizza information");
+			
+//			restaurant.getNumPizzaOrders();
+//			restaurant.getPizzaByIndex(index)
+//			restaurant.getNumCustomerOrders();
+//			restaurant.getCustomerByIndex(index);
 		} else if (move == "calc") {
 			JOptionPane.showMessageDialog(frame, "Display delivery and finacial information");
+			
+//			restaurant.getTotalDeliveryDistance();
+//			restaurant.getTotalProfit();
 		}
 	}
 }

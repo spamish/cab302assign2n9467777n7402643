@@ -35,7 +35,8 @@ public class PizzaRestaurant {
 	 * 
 	 */
 	public PizzaRestaurant() {
-		// TO DO
+//		customers = new ArrayList<Customer>();
+//		pizzas    = new ArrayList<Pizza>();
 	}
 
 	/**
@@ -54,7 +55,8 @@ public class PizzaRestaurant {
      *
 	 */
 	public boolean processLog(String filename) throws CustomerException, PizzaException, LogHandlerException {
-		// TO DO
+//		customers = LogHandler.populateCustomerDataset(filename);
+//		pizzas    = LogHandler.populatePizzaDataset(filename);
 	}
 
 	/**
