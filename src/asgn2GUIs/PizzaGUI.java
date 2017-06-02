@@ -150,14 +150,14 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 		menuFile.getMenuComponent(1).setEnabled(false);
 		menuDisplay.getMenuComponent(0).setEnabled(false);
 		menuDisplay.getMenuComponent(1).setEnabled(false);
-		eventLog.append("cleared database\n");
+		eventLog.setText("cleared database\n");
 	}
 	
 	private void displayInformation() {
 		int customerSize = restaurant.getNumCustomerOrders();
-		int pizzaSize    = restaurant.getNumPizzaOrders();
+//		int pizzaSize    = restaurant.getNumPizzaOrders();
 		String[][] customerData = new String[customerSize][];
-		String[][] pizzaData    = new String[pizzaSize][];
+//		String[][] pizzaData    = new String[pizzaSize][];
 		
 		String[] customerHeaders = {
 				"Customer Name",
@@ -167,13 +167,13 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 				"Distance"
 		};
 		
-		String[] pizzaHeaders    = {
-				"Pizza Type",
-				"Quantity",
-				"Order Price",
-				"Order Cost",
-				"Order Profit"
-		};
+//		String[] pizzaHeaders    = {
+//				"Pizza Type",
+//				"Quantity",
+//				"Order Price",
+//				"Order Cost",
+//				"Order Profit"
+//		};
 		
 		try {
 			for (int i = 0; i < customerSize; i++) {
@@ -195,7 +195,7 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 //				Pizza pizza = restaurant.getPizzaByIndex(i);
 //				pizzaData[i] = new String[] {
 //						pizza.getPizzaType(),
-//						String.format("%.2f", pizza.getQuantity()),
+//						String.format("%d", pizza.getQuantity()),
 //						String.format("%.2f", pizza.getOrderPrice()),
 //						String.format("%.2f", pizza.getOrderCost()),
 //						String.format("%.2f", pizza.getOrderProfit())
@@ -208,21 +208,41 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 //		DISPLAY TO BE REPLACED WITH
 //		JTable(Object[][] rowData, Object[] columnNames)
 		
-		eventLog.append(String.format("%-25s\t%s\t%s\t%s\n",
+		eventLog.append(String.format("%-25s\t%s\t%s\t%s\t%s\n",
 				customerHeaders[0],
 				customerHeaders[1],
 				customerHeaders[2],
-				customerHeaders[3]
+				customerHeaders[3],
+				customerHeaders[4]
 		));
 		
 		for (int i = 0; i < customerSize; i++) {
-			eventLog.append(String.format("%-25s\t%s\t%s\t%s\n",
+			eventLog.append(String.format("%-25s\t%s\t%s\t%s\t%s\n",
 					customerData[i][0],
 					customerData[i][1],
 					customerData[i][2],
-					customerData[i][3]
+					customerData[i][3],
+					customerData[i][4]
 			));
 		}
+
+//		eventLog.append(String.format("%s\t%s\t%s\t%s\t%s\n",
+//				pizzaHeaders[0],
+//				pizzaHeaders[1],
+//				pizzaHeaders[2],
+//				pizzaHeaders[3],
+//				pizzaHeaders[4]
+//		));
+
+//		for (int i = 0; i < pizzaSize; i++) {
+//			eventLog.append(String.format("%s\t%s\t%s\t%s\t%s\n",
+//					pizzaData[i][0],
+//					pizzaData[i][1],
+//					pizzaData[i][2],
+//					pizzaData[i][3],
+//					pizzaData[i][4]
+//			));
+//		}
 	}
 	
 	private void displayCalculations() {
