@@ -1,7 +1,7 @@
 package asgn2Customers;
 
 import asgn2Exceptions.CustomerException;
-import asgn2Exceptions.LogHandlerException;
+
 
 /** An abstract class to represent a customer at the Pizza Palace restaurant.
  *  The Customer class is used as a base class of PickUpCustomer, 
