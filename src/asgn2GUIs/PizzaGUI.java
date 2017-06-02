@@ -34,7 +34,6 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 	private JFrame frame;
 	private JMenu menuFile;
 	private JMenu menuDisplay;
-	private File fileData;
 	
 	/**
 	 * Creates a new Pizza GUI with the specified title 
@@ -43,7 +42,9 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 	public PizzaGUI(String title) {
 		frame = new JFrame(title);
 		frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
-		frame.setExtendedState(MAXIMIZED_BOTH);
+//		frame.setExtendedState(MAXIMIZED_BOTH);
+		frame.setLocation(100, 50);
+		frame.setSize(600, 600);
 		frame.setJMenuBar(createMenuBar());
 		frame.setVisible(true);
 
@@ -85,7 +86,7 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 
 	@Override
 	public void run() {
-//		restaurant = new PizzaRestaurant();
+		restaurant = new PizzaRestaurant();
 	}
 
 	@Override
@@ -94,36 +95,34 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 		
 		if (move == "load") {
 			JFileChooser chooser = new JFileChooser();
-			File directory       = new File(System.getProperty("user.dir") + "/logs");
+			File file            = new File(System.getProperty("user.dir") + "/logs");
 			
-			chooser.setCurrentDirectory(directory);
+			chooser.setCurrentDirectory(file);
 			int response = chooser.showOpenDialog(frame);
 			
 			if (response == JFileChooser.APPROVE_OPTION) {
-				fileData = chooser.getSelectedFile();
-				JOptionPane.showMessageDialog(frame, "Opened " + fileData.getPath());
+				file = chooser.getSelectedFile();
 				
-//				try {
-//					restaurant.processLog(fileData.getPath());
+				try {
+					restaurant.processLog(file.getPath());
 					
 					menuFile.getMenuComponent(0).setEnabled(false);
 					menuFile.getMenuComponent(1).setEnabled(true);
 					menuDisplay.getMenuComponent(0).setEnabled(true);
 					menuDisplay.getMenuComponent(1).setEnabled(true);
-//				} catch (CustomerException | PizzaException | LogHandlerException error) {
-//					JOptionPane.showMessageDialog(frame, error.getMessage());
-//				}
+					
+//					print loading confirmation to main window
+				} catch (CustomerException | PizzaException | LogHandlerException error) {
+					JOptionPane.showMessageDialog(frame, error.getMessage());
+				}
 	        }
 		} else if (move == "reset") {
-			fileData = null;
 			menuFile.getMenuComponent(0).setEnabled(true);
 			menuFile.getMenuComponent(1).setEnabled(false);
 			menuDisplay.getMenuComponent(0).setEnabled(false);
 			menuDisplay.getMenuComponent(1).setEnabled(false);
-
-			JOptionPane.showMessageDialog(frame, "Cleared file");
 			
-//			restaurant.resetDetails();
+			restaurant.resetDetails();
 		} else if (move == "info") {
 //			int index;
 			

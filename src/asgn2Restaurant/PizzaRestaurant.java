@@ -35,8 +35,8 @@ public class PizzaRestaurant {
 	 * 
 	 */
 	public PizzaRestaurant() {
-//		customers = new ArrayList<Customer>();
-//		pizzas    = new ArrayList<Pizza>();
+		customers = new ArrayList<Customer>();
+		pizzas    = new ArrayList<Pizza>();
 	}
 
 	/**
@@ -55,8 +55,9 @@ public class PizzaRestaurant {
      *
 	 */
 	public boolean processLog(String filename) throws CustomerException, PizzaException, LogHandlerException {
-//		customers = LogHandler.populateCustomerDataset(filename);
-//		pizzas    = LogHandler.populatePizzaDataset(filename);
+		customers = LogHandler.populateCustomerDataset(filename);
+		pizzas    = LogHandler.populatePizzaDataset(filename);
+		return true;
 	}
 
 	/**
@@ -126,7 +127,8 @@ public class PizzaRestaurant {
 	 * <P> POST:  The pizzas and customers fields are set to their initial empty states
 	 */
 	public void resetDetails() {
-		// TO DO
+		customers.clear();
+		pizzas.clear();
 	}
 
 }

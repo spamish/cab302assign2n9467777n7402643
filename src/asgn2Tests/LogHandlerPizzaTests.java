@@ -47,7 +47,59 @@ public class LogHandlerPizzaTests {
 	}
 	
 	// test creating pizzas
-	
+
+	@Test
+	public void CreatePizzaMargherita() throws PizzaException {
+		String line = "";
+		
+		try {
+			pizza = LogHandler.createPizza(line);
+		} catch (LogHandlerException e) {
+			e.printStackTrace();
+		}
+		
+		assertEquals("", pizza, margherita);
+	}
+
+	@Test
+	public void CreatePizzaVegetarian() throws PizzaException {
+		String line = "";
+		
+		try {
+			pizza = LogHandler.createPizza(line);
+		} catch (LogHandlerException e) {
+			e.printStackTrace();
+		}
+		
+		assertEquals("", pizza, margherita);
+	}
+
+	@Test
+	public void CreatePizzaMeatLovers() throws PizzaException {
+		String line = "";
+		
+		try {
+			pizza = LogHandler.createPizza(line);
+		} catch (LogHandlerException e) {
+			e.printStackTrace();
+		}
+		
+		assertEquals("", pizza, margherita);
+	}
+
+	@Test
+	public void CreatePizzaInvalidCode() throws PizzaException {
+		String line = "";
+		
+		try {
+			pizza = LogHandler.createPizza(line);
+		} catch (LogHandlerException e) {
+			e.printStackTrace();
+		}
+		
+		assertEquals("", pizza, margherita);
+	}
+
 	@Test
 	public void CreatePizza() throws PizzaException {
 		String line = "";

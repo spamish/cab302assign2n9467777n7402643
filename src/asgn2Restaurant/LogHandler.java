@@ -24,9 +24,6 @@ import asgn2Pizzas.Pizza;
  *
  */
 public class LogHandler {
-	
-
-
 	/**
 	 * Returns an ArrayList of Customer objects from the information contained in the log file ordered as they appear in the log file.
 	 * @param filename The file name of the log file
@@ -36,27 +33,27 @@ public class LogHandler {
 	 * 
 	 */
 	public static ArrayList<Customer> populateCustomerDataset(String filename) throws CustomerException, LogHandlerException {
-//		ArrayList<Customer> customers = new ArrayList<Customer>();
-//		BufferedReader reader;
+		ArrayList<Customer> customers = new ArrayList<Customer>();
+		BufferedReader reader;
 		
-//		try {
-//			reader = new BufferedReader(new FileReader(filename));
-//		} catch (FileNotFoundException e) {
-//			throw new LogHandlerException(e);
-//		}
+		try {
+			reader = new BufferedReader(new FileReader(filename));
+		} catch (FileNotFoundException e) {
+			throw new LogHandlerException(e);
+		}
 		
-//		try {
-//			String line;
-//			while ((line = reader.readLine()) != null) {
-//				customers.add(createCustomer(line));
-//			}
+		try {
+			String line;
+			while ((line = reader.readLine()) != null) {
+				customers.add(createCustomer(line));
+			}
 			
-//			reader.close();
-//		} catch (IOException e) {
-//			throw new LogHandlerException(e);
-//		}
+			reader.close();
+		} catch (IOException e) {
+			throw new LogHandlerException(e);
+		}
 		
-//		return customers;
+		return customers;
 	}		
 
 	/**
@@ -68,27 +65,27 @@ public class LogHandler {
 	 * 
 	 */
 	public static ArrayList<Pizza> populatePizzaDataset(String filename) throws PizzaException, LogHandlerException {
-//		ArrayList<Pizza> pizzas = new ArrayList<Pizza>();
-//		BufferedReader reader;
+		ArrayList<Pizza> pizzas = new ArrayList<Pizza>();
+		BufferedReader reader;
 		
-//		try {
-//			reader = new BufferedReader(new FileReader(filename));
-//		} catch (FileNotFoundException e) {
-//			throw new LogHandlerException(e);
-//		}
+		try {
+			reader = new BufferedReader(new FileReader(filename));
+		} catch (FileNotFoundException e) {
+			throw new LogHandlerException(e);
+		}
 		
-//		try {
-//			String line;
-//			while ((line = reader.readLine()) != null) {
+		try {
+			String line;
+			while ((line = reader.readLine()) != null) {
 //				pizzas.add(createPizza(line));
-//			}
+			}
 			
-//			reader.close();
-//		} catch (IOException e) {
-//			throw new LogHandlerException(e);
-//		}
+			reader.close();
+		} catch (IOException e) {
+			throw new LogHandlerException(e);
+		}
 		
-//		return pizzas;
+		return pizzas;
 	}		
 
 	
@@ -101,8 +98,8 @@ public class LogHandler {
 	 * @throws LogHandlerException - If there was a problem parsing the line from the log file.
 	 */
 	public static Customer createCustomer(String line) throws CustomerException, LogHandlerException {
-//		String[] elements = line.split("'");
-//		if (elements.length != 9) throw new LogHandlerException("Incompatible log line");
+		String[] elements = line.split(",");
+		if (elements.length != 9) throw new LogHandlerException("Incompatible log line");
 		
 //		String name         = elements[2];
 //		String mobileNumber = elements[3];
@@ -110,7 +107,32 @@ public class LogHandler {
 //		int locationX       = Integer.parseInt(elements[5]);
 //		int locationY       = Integer.parseInt(elements[6]);
 		
+		LocalTime orderTime    = LocalTime.parse(elements[0]);
+		LocalTime deliveryTime = LocalTime.parse(elements[1]);
+		String name            = elements[2];
+		String mobileNumber    = elements[3];
+		String customerCode    = elements[4];
+		int locationX          = Integer.parseInt(elements[5]);
+		int locationY          = Integer.parseInt(elements[6]);
+		String pizzaCode       = elements[7];
+		int quantity           = Integer.parseInt(elements[8]);
+		
+		
+		
+		
+		System.out.println("'"
+				+ orderTime + "' '"
+				+ deliveryTime + "' '"
+				+ name + "' '"
+				+ mobileNumber + "' '"
+				+ customerCode + "' '"
+				+ locationX + "' '"
+				+ locationY + "' '"
+				+ pizzaCode + "' '"
+				+ quantity + "'");
+		
 //		return CustomerFactory.getCustomer(customerCode, name, mobileNumber, locationX, locationY);
+		return null;
 	}
 	
 	/**
