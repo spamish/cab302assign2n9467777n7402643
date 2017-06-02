@@ -2,6 +2,9 @@ package asgn2Pizzas;
 
 import java.time.LocalTime;
 
+import asgn2Exceptions.PizzaException;
+import asgn2Pizzas.PizzaTopping;
+
 
 /**
  * An abstract class that represents pizzas sold at the Pizza Palace restaurant. 
@@ -13,6 +16,15 @@ import java.time.LocalTime;
  *
  */
 public abstract class Pizza  {
+	int quantity;
+	double price, cost;
+	String type;
+	LocalTime orderTime;
+	LocalTime deliveryTime;
+	LocalTime kitchenopen = LocalTime.of(19, 00);
+	LocalTime kitchenclosed = LocalTime.of(23, 00);
+	LocalTime temp;
+	
 	
 	/**
 	 *  This class represents a pizza produced at the Pizza Palace restaurant.  A detailed description of the class's fields
@@ -32,17 +44,39 @@ public abstract class Pizza  {
 	 * 
 	 */
 	public Pizza(int quantity, LocalTime orderTime, LocalTime deliveryTime, String type, double price) throws PizzaException {
-		// TO DO	
+		if (quantity < 1 || quantity < 10) throw new PizzaException("Invlaid quantity");
+		if (orderTime.isBefore(kitchenopen) || orderTime.isAfter(kitchenclosed)) throw new PizzaException("Kitchen is not open");
+		if (type != "Margherita" || type != "Vegetarian" || type != "Meat Lovers") throw new PizzaException("Pizza does not exist");
+			
+		temp = orderTime;
+		temp.plusHours(1);
+		if(!temp.isBefore(deliveryTime)) throw new PizzaException("Throw pizza out");
+		
+		
+		
 	}
 
 	/**
-	 * Calculates how much a pizza would could to make calculated from its toppings.
+	 * Calculates how much a pizza would take to make calculated from its toppings.
 	 *  
      * <P> PRE: TRUE
 	 * <P> POST: The cost field is set to sum of the Pizzas's toppings
 	 */
 	public final void calculateCostPerPizza() {
-		// TO DO
+		if(type == "Margherita") {
+			this.cost = PizzaTopping.TOMATO.getCost() + PizzaTopping.CHEESE.getCost();
+		}
+		
+		if(type == "Vegetarian") {
+			this.cost = PizzaTopping.TOMATO.getCost() + PizzaTopping.CHEESE.getCost() + PizzaTopping.EGGPLANT.getCost()
+					+ PizzaTopping.MUSHROOM.getCost() + PizzaTopping.CAPSICUM.getCost();
+			
+		}
+		
+		if(type == "Meat Lovers") {
+			this.cost = PizzaTopping.TOMATO.getCost() + PizzaTopping.CHEESE.getCost() + PizzaTopping.BACON.getCost()
+			+ PizzaTopping.PEPPERONI.getCost() + PizzaTopping.SALAMI.getCost();
+		}
 	}
 	
 	/**
@@ -50,7 +84,7 @@ public abstract class Pizza  {
 	 * @return The amount that an individual pizza costs to make.
 	 */
 	public final double getCostPerPizza() {
-		// TO DO
+		return this.cost;
 	}
 
 	/**
@@ -58,7 +92,7 @@ public abstract class Pizza  {
 	 * @return The amount that an individual pizza is sold to the customer.
 	 */
 	public final double getPricePerPizza() {
-		// TO DO
+		return this.price;
 	}
 
 	/**
@@ -66,7 +100,7 @@ public abstract class Pizza  {
 	 * @return The amount that the entire order costs to make, taking into account the type and quantity of pizzas. 
 	 */
 	public final double getOrderCost() {
-		// TO DO
+		return this.quantity * this.cost;
 	}
 	
 	/**
@@ -74,7 +108,7 @@ public abstract class Pizza  {
 	 * @return The amount that the entire order is sold to the customer, taking into account the type and quantity of pizzas. 
 	 */
 	public final double getOrderPrice() {
-		// TO DO
+		return this.quantity * this.price;
 	}
 	
 	
@@ -83,7 +117,7 @@ public abstract class Pizza  {
 	 * @return  Returns the profit made by the restaurant on the order which is the order price minus the order cost.
 	 */
 	public final double getOrderProfit() {
-		// TO DO
+		return getOrderPrice() - getOrderCost();
 	}
 	
 
@@ -93,7 +127,26 @@ public abstract class Pizza  {
 	 * @return Returns  true if the instance of Pizza contains the specified topping and false otherwise.
 	 */
 	public final boolean containsTopping(PizzaTopping topping) {
-		// TO DO
+		
+		if((getPizzaType() == "Margherita") && (topping == PizzaTopping.CHEESE || topping == PizzaTopping.TOMATO)) {
+			return true;
+		}
+		
+		if((getPizzaType() == "Vegetarian") && (topping == PizzaTopping.CHEESE || topping == PizzaTopping.TOMATO ||
+				topping == PizzaTopping.EGGPLANT|| topping == PizzaTopping.MUSHROOM || topping == PizzaTopping.CAPSICUM)) {
+	
+			return true;
+			
+		}
+		
+		if((getPizzaType() == "Meat Lovers") && (topping == PizzaTopping.CHEESE || topping == PizzaTopping.TOMATO ||
+				topping == PizzaTopping.BACON|| topping == PizzaTopping.PEPPERONI|| topping == PizzaTopping.SALAMI)) {
+			
+			return true;
+		} 
+		
+		else return false;
+	
 	}
 	
 	/**
@@ -101,7 +154,7 @@ public abstract class Pizza  {
 	 * @return the quantity of pizzas ordered. 
 	 */
 	public final int getQuantity() {
-		// TO DO
+		return this.quantity;
 	}
 
 	/**
@@ -110,7 +163,7 @@ public abstract class Pizza  {
 	 * @return A human understandable description of the Pizza's type.
 	 */
 	public final String getPizzaType() {
-		// TO DO
+		return this.type;
 	}
 
 
