@@ -29,7 +29,21 @@ public class PizzaFactory {
 	 * @return A valid Pizza object using the specified parameters 
 	 * */
 	public static Pizza getPizza(String pizzaCode, int quantity, LocalTime orderTime, LocalTime deliveryTime) throws PizzaException {
-		// TO DO
+		if (pizzaCode.equals("PZM")) {
+			return new MargheritaPizza(quantity, orderTime, deliveryTime);
+			
+		}
+		
+		else if (pizzaCode.equals("PZV")) {
+			return new VegetarianPizza(quantity, orderTime, deliveryTime);
+		}
+		
+		else if (pizzaCode.equals("PZM")) {
+			return new MeatLoversPizza(quantity, orderTime, deliveryTime);
+			
+		} else {
+			throw new PizzaException("Invalid pizza Code");
+		}
 	}
 
 }

@@ -1,6 +1,8 @@
 package asgn2Pizzas;
 
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 import asgn2Exceptions.PizzaException;
 import asgn2Pizzas.PizzaTopping;
@@ -17,13 +19,14 @@ import asgn2Pizzas.PizzaTopping;
  */
 public abstract class Pizza  {
 	int quantity;
-	double price, cost;
+	double price, cost, sum;
 	String type;
 	LocalTime orderTime;
 	LocalTime deliveryTime;
 	LocalTime kitchenopen = LocalTime.of(19, 00);
 	LocalTime kitchenclosed = LocalTime.of(23, 00);
 	LocalTime temp;
+	ArrayList<PizzaTopping> toppings;
 	
 	
 	/**
@@ -63,21 +66,13 @@ public abstract class Pizza  {
 	 * <P> POST: The cost field is set to sum of the Pizzas's toppings
 	 */
 	public final void calculateCostPerPizza() {
-		if(type == "Margherita") {
-			this.cost = PizzaTopping.TOMATO.getCost() + PizzaTopping.CHEESE.getCost();
-		}
 		
-		if(type == "Vegetarian") {
-			this.cost = PizzaTopping.TOMATO.getCost() + PizzaTopping.CHEESE.getCost() + PizzaTopping.EGGPLANT.getCost()
-					+ PizzaTopping.MUSHROOM.getCost() + PizzaTopping.CAPSICUM.getCost();
-			
-		}
+		for(PizzaTopping i : toppings)
+		sum += i.getCost();
+		this.cost = sum;
 		
-		if(type == "Meat Lovers") {
-			this.cost = PizzaTopping.TOMATO.getCost() + PizzaTopping.CHEESE.getCost() + PizzaTopping.BACON.getCost()
-			+ PizzaTopping.PEPPERONI.getCost() + PizzaTopping.SALAMI.getCost();
 		}
-	}
+
 	
 	/**
 	 * Returns the amount that an individual pizza costs to make.
@@ -128,24 +123,15 @@ public abstract class Pizza  {
 	 */
 	public final boolean containsTopping(PizzaTopping topping) {
 		
-		if((getPizzaType() == "Margherita") && (topping == PizzaTopping.CHEESE || topping == PizzaTopping.TOMATO)) {
-			return true;
+		Iterator<PizzaTopping> iterator = toppings.iterator();
+		
+		while (iterator.hasNext()) {
+			if(iterator.next() == topping) {
+				return true;
+				
+			} 
 		}
-		
-		if((getPizzaType() == "Vegetarian") && (topping == PizzaTopping.CHEESE || topping == PizzaTopping.TOMATO ||
-				topping == PizzaTopping.EGGPLANT|| topping == PizzaTopping.MUSHROOM || topping == PizzaTopping.CAPSICUM)) {
-	
-			return true;
-			
-		}
-		
-		if((getPizzaType() == "Meat Lovers") && (topping == PizzaTopping.CHEESE || topping == PizzaTopping.TOMATO ||
-				topping == PizzaTopping.BACON|| topping == PizzaTopping.PEPPERONI|| topping == PizzaTopping.SALAMI)) {
-			
-			return true;
-		} 
-		
-		else return false;
+		return false;
 	
 	}
 	
