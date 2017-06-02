@@ -34,6 +34,9 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 	private JFrame frame;
 	private JMenu menuFile;
 	private JMenu menuDisplay;
+	private JPanel main;
+	private JPanel info;
+	private JPanel calc;
 	
 	/**
 	 * Creates a new Pizza GUI with the specified title 
@@ -45,16 +48,14 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 //		frame.setExtendedState(MAXIMIZED_BOTH);
 		frame.setLocation(100, 50);
 		frame.setSize(600, 600);
-		frame.setJMenuBar(createMenuBar());
-		frame.setVisible(true);
-
-		menuFile.getMenuComponent(0).setEnabled(true);
-		menuFile.getMenuComponent(1).setEnabled(false);
-		menuDisplay.getMenuComponent(0).setEnabled(false);
-		menuDisplay.getMenuComponent(1).setEnabled(false);
+		
+		createMenuBar();
+		createMainPanel();
+		createInformationPanel();
+		createCalculationsPanel();
 	}
 	
-	private JMenuBar createMenuBar() {
+	private void createMenuBar() {
 		JMenuBar bar = new JMenuBar();
 		menuFile     = new JMenu("Files");
 		menuDisplay  = new JMenu("Displays");
@@ -66,7 +67,20 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 		
 		bar.add(menuFile);
 		bar.add(menuDisplay);
-		return bar;
+		frame.setJMenuBar(bar);
+	}
+
+	private void createMainPanel() {
+		JLabel label = new JLabel("Hello Java Swing World");
+		frame.getContentPane().add(label);
+	}
+
+	private void createInformationPanel() {
+		
+	}
+
+	private void createCalculationsPanel() {
+		
 	}
 	
 	private void createMenuItem(JMenu menu, String title, String command) {
@@ -79,6 +93,13 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 	@Override
 	public void run() {
 		restaurant = new PizzaRestaurant();
+		
+		menuFile.getMenuComponent(0).setEnabled(true);
+		menuFile.getMenuComponent(1).setEnabled(false);
+		menuDisplay.getMenuComponent(0).setEnabled(false);
+		menuDisplay.getMenuComponent(1).setEnabled(false);
+		
+		frame.setVisible(true);
 	}
 
 	@Override
@@ -135,20 +156,19 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 	}
 	
 	private void displayInformation() {
-//		int index;
+		int index;
 		
-		JOptionPane.showMessageDialog(frame, "Display customer and pizza information");
-		
-//		restaurant.getNumPizzaOrders();
-//		restaurant.getPizzaByIndex(index)
-//		restaurant.getNumCustomerOrders();
+//		index = restaurant.getNumCustomerOrders();
 //		restaurant.getCustomerByIndex(index);
+//		index = restaurant.getNumPizzaOrders();
+//		restaurant.getPizzaByIndex(index);
+		
 	}
 	
 	private void displayCalculations() {
-		JOptionPane.showMessageDialog(frame, "Display delivery and finacial information");
-		
-//		restaurant.getTotalDeliveryDistance();
+		double distance = restaurant.getTotalDeliveryDistance();
 //		restaurant.getTotalProfit();
+		
+		JOptionPane.showMessageDialog(frame, "Display delivery and finacial information " + distance);
 	}
 }

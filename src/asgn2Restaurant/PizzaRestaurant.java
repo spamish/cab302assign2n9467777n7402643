@@ -1,6 +1,7 @@
 package asgn2Restaurant;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import asgn2Customers.Customer;
 import asgn2Exceptions.CustomerException;
@@ -67,6 +68,7 @@ public class PizzaRestaurant {
 	 * @throws CustomerException if index is invalid.
 	 */
 	public Customer getCustomerByIndex(int index) throws CustomerException {
+		if ((index < 0) || (index > customers.size())) throw new CustomerException("Customer index out of bounds");
 		return customers.get(index);
 	}
 	
@@ -108,8 +110,14 @@ public class PizzaRestaurant {
 	 * @return the total delivery distance for all Customers objects in the customers field.
 	 */
 	public double getTotalDeliveryDistance() {
-		int siz = getNumPizzaOrders();
-		return 0.0;
+		Iterator<Customer> iterator = customers.iterator();
+		double total = 0.0;
+		
+		while (iterator.hasNext()) {
+			total += iterator.next().getDeliveryDistance();
+		}
+		
+		return total;
 	}
 
 	/**
