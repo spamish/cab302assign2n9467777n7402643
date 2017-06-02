@@ -29,29 +29,22 @@ public class LogHandlerPizzaTests {
 	Pizza meatlovers;
 	Pizza pizza;
 	ArrayList<Pizza> list;
-	ArrayList<Pizza> reference;
 
 	@Before
 	public void ReferencePizzas() throws PizzaException {
-		orderTime    = LocalTime.parse("20:00:00");
-		deliveryTime = LocalTime.parse("20:30:00");
+		orderTime    = LocalTime.parse("21:00:00");
+		deliveryTime = LocalTime.parse("21:35:00");
 		margherita   = new MargheritaPizza(1,  orderTime, deliveryTime);
-		vegetarian   = new VegetarianPizza(1,  orderTime, deliveryTime);
-		meatlovers   = new MeatLoversPizza(1,  orderTime, deliveryTime);
-		pizza        = null;
-		
-		list.clear();
-		reference.add(margherita);
-		reference.add(vegetarian);
-		reference.add(meatlovers);
+		vegetarian   = new VegetarianPizza(2,  orderTime, deliveryTime);
+		meatlovers   = new MeatLoversPizza(3,  orderTime, deliveryTime);
 	}
 	
 	// test creating pizzas
 
 	@Test
 	public void CreatePizzaMargherita() throws PizzaException {
-		String line = "";
-		
+		String line = "21:00:00,21:35:00,April O'Neal,0987654321,DNC,3,4,PZM,1";
+
 		try {
 			pizza = LogHandler.createPizza(line);
 		} catch (LogHandlerException e) {
@@ -63,7 +56,7 @@ public class LogHandlerPizzaTests {
 
 	@Test
 	public void CreatePizzaVegetarian() throws PizzaException {
-		String line = "";
+		String line = "21:00:00,21:35:00,Casey Jones,0123456789,DVC,5,5,PZV,2";
 		
 		try {
 			pizza = LogHandler.createPizza(line);
@@ -76,7 +69,7 @@ public class LogHandlerPizzaTests {
 
 	@Test
 	public void CreatePizzaMeatLovers() throws PizzaException {
-		String line = "";
+		String line = "21:00:00,21:35:00,Oroku Saki,0111222333,PUC,0,0,PZL,3";
 		
 		try {
 			pizza = LogHandler.createPizza(line);
@@ -86,46 +79,4 @@ public class LogHandlerPizzaTests {
 		
 		assertEquals("", pizza, margherita);
 	}
-
-	@Test
-	public void CreatePizzaInvalidCode() throws PizzaException {
-		String line = "";
-		
-		try {
-			pizza = LogHandler.createPizza(line);
-		} catch (LogHandlerException e) {
-			e.printStackTrace();
-		}
-		
-		assertEquals("", pizza, margherita);
-	}
-
-	@Test
-	public void CreatePizza() throws PizzaException {
-		String line = "";
-		
-		try {
-			pizza = LogHandler.createPizza(line);
-		} catch (LogHandlerException e) {
-			e.printStackTrace();
-		}
-		
-		assertEquals("", pizza, margherita);
-	}
-	
-	// test creating pizza dataset
-	
-	@Test
-	public void PopulatePizzaDataset() throws PizzaException {
-		String filename = "";
-		
-		try {
-			list = LogHandler.populatePizzaDataset(filename);
-		} catch (LogHandlerException e) {
-			e.printStackTrace();
-		}
-		
-		assertEquals("", list, reference);
-	}
-	
 }

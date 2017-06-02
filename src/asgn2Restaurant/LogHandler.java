@@ -14,6 +14,7 @@ import asgn2Exceptions.CustomerException;
 import asgn2Exceptions.LogHandlerException;
 import asgn2Exceptions.PizzaException;
 import asgn2Pizzas.Pizza;
+import asgn2Pizzas.PizzaFactory;
 
 /**
  *
@@ -127,27 +128,22 @@ public class LogHandler {
 	 * @throws LogHandlerException - If there was a problem parsing the line from the log file.
 	 */
 	public static Pizza createPizza(String line) throws PizzaException, LogHandlerException {
-//		String[] elements = line.split("'");
+//		String[] elements = line.split(",");
 //		if (elements.length != 9) throw new LogHandlerException("Incompatible log line");
-
+//
 //		LocalTime orderTime, deliveryTime;
-//		String name, mobileNumber, customerCode, pizzaCode;
-//		int locationX, locationY, quantity;
-		
+//		String pizzaCode;
+//		int quantity;
+//		
 //		try {
 //			orderTime    = LocalTime.parse(elements[0]);
 //			deliveryTime = LocalTime.parse(elements[1]);
-//			name         = elements[2];
-//			mobileNumber = elements[3];
-//			customerCode = elements[4];
-//			locationX    = Integer.parseInt(elements[5]);
-//			locationY    = Integer.parseInt(elements[6]);
 //			pizzaCode    = elements[7];
 //			quantity     = Integer.parseInt(elements[8]);
 //		} catch (DateTimeParseException | NumberFormatException error) {
 //			throw new LogHandlerException(error);
 //		}
-		
+//		
 //		return PizzaFactory.getPizza(pizzaCode, quantity, orderTime, deliveryTime);
 	}
 
