@@ -55,9 +55,7 @@ public class PizzaRestaurant {
 	 */
 	public boolean processLog(String filename) throws CustomerException, PizzaException, LogHandlerException {
 		customers = LogHandler.populateCustomerDataset(filename);
-//		pizzas    = LogHandler.populatePizzaDataset(filename);
-		
-//		if (customers.size() != pizzas.size()) throw new LogHandlerException("Mismatched customers and pizzas");
+		pizzas    = LogHandler.populatePizzaDataset(filename);
 		return true;
 	}
 
@@ -79,6 +77,7 @@ public class PizzaRestaurant {
 	 * @throws PizzaException if index is invalid.
 	 */	
 	public Pizza getPizzaByIndex(int index) throws PizzaException {
+		if ((index < 0) || (index > pizzas.size())) throw new PizzaException("Pizza index out of bounds");
 		return pizzas.get(index);
 	}
 	
@@ -102,8 +101,6 @@ public class PizzaRestaurant {
 		return customers.size();
 	}
 
-			
-	
 	/**
 	 * Returns the total delivery distance for all of the customers.
 	 * 
@@ -126,7 +123,14 @@ public class PizzaRestaurant {
 	 * @return the total profit for all of the Pizza objects in the pizzas field.
 	 */	
 	public double getTotalProfit() {
-		return 0.0;
+		Iterator<Pizza> iterator = pizzas.iterator();
+		double total = 0.0;
+		
+		while (iterator.hasNext()) {
+			total += iterator.next().getOrderProfit();
+		}
+		
+		return total;
 	}
 	
 	/**

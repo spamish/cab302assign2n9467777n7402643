@@ -42,6 +42,8 @@ public class PizzaFactoryTests {
 		ten_meatlovers    = new MeatLoversPizza(10, orderTime, deliveryTime);
 	}
 
+	// test that pizza "PZM" creates margherita
+	
 	@Test
 	public void GetPizzaSingleMargherita() throws PizzaException {
 		String pizzaCode = "PZM";
@@ -50,6 +52,17 @@ public class PizzaFactoryTests {
 		
 		assertTrue("Should return single margherita", single_pizza.equals(single_margherita));
 	}
+	
+	@Test
+	public void GetPizzaTenMargherita() throws PizzaException {
+		String pizzaCode = "PZM";
+		
+		ten_pizza = PizzaFactory.getPizza(pizzaCode, 10, orderTime, deliveryTime);
+		
+		assertTrue("Should return ten margherita", ten_pizza.equals(ten_margherita));
+	}
+	
+	// test that "PZV" creates vegetarian
 	
 	@Test
 	public void GetPizzaSingleVegetarian() throws PizzaException {
@@ -61,6 +74,17 @@ public class PizzaFactoryTests {
 	}
 	
 	@Test
+	public void GetPizzaTenVegetarian() throws PizzaException {
+		String pizzaCode = "PZV";
+		
+		ten_pizza = PizzaFactory.getPizza(pizzaCode, 10, orderTime, deliveryTime);
+		
+		assertTrue("Should return ten vegetarian", ten_pizza.equals(ten_vegetarian));
+	}
+	
+	// test that "PZL" creates meat lovers
+	
+	@Test
 	public void GetPizzaSingleMeatLovers() throws PizzaException {
 		String pizzaCode = "PZL";
 		
@@ -70,24 +94,6 @@ public class PizzaFactoryTests {
 	}
 
 	@Test
-	public void GetPizzaTenMargherita() throws PizzaException {
-		String pizzaCode = "PZM";
-		
-		ten_pizza = PizzaFactory.getPizza(pizzaCode, 10, orderTime, deliveryTime);
-		
-		assertTrue("Should return ten margherita", ten_pizza.equals(ten_margherita));
-	}
-	
-	@Test
-	public void GetPizzaTenVegetarian() throws PizzaException {
-		String pizzaCode = "PZV";
-		
-		ten_pizza = PizzaFactory.getPizza(pizzaCode, 10, orderTime, deliveryTime);
-		
-		assertTrue("Should return ten vegetarian", ten_pizza.equals(ten_vegetarian));
-	}
-	
-	@Test
 	public void GetPizzaTenMeatLovers() throws PizzaException {
 		String pizzaCode = "PZL";
 		
@@ -95,6 +101,8 @@ public class PizzaFactoryTests {
 		
 		assertTrue("Should return ten meat lovers", ten_pizza.equals(ten_meatlovers));
 	}
+	
+	// test that other codes are invalid
 	
 	@Test(expected = PizzaException.class)
 	public void GetPizzaInvalidCode() throws PizzaException {
