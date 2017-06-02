@@ -6,12 +6,14 @@ import java.io.File;
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.time.LocalTime;
+import java.util.Iterator;
 
 import asgn2Customers.Customer;
 import asgn2Exceptions.CustomerException;
 import asgn2Exceptions.LogHandlerException;
 import asgn2Exceptions.PizzaException;
 import asgn2Pizzas.Pizza;
+import asgn2Pizzas.PizzaTopping;
 import asgn2Restaurant.PizzaRestaurant;
 
 import java.awt.*;
@@ -40,6 +42,9 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 	private String title;
 	private JMenuItem load, clear, info, calcs;
 	private JLabel message;
+	private JTable information;
+	private JTextField logistics;
+	private JTextField finances;
 	private JPanel cards;
 	
 	/**
@@ -72,22 +77,44 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 		JFrame frame = new JFrame(title);
 		frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		frame.setLocation(100, 50);
-		
 		frame.setJMenuBar(createMenu());
-		message = new JLabel("", SwingConstants.CENTER);
 
 		JPanel blank = new JPanel();
 		blank.setPreferredSize(new Dimension(600, 400));
 		blank.setBorder(new EmptyBorder(10, 10, 10, 10));
 		
+		message = new JLabel();
 		JPanel load = new JPanel();
 		load.setPreferredSize(new Dimension(600, 400));
 		load.setBorder(new EmptyBorder(10, 10, 10, 10));
 		load.add(message, BorderLayout.CENTER);
 
+		information = new JTable();
+		
+		JPanel table = new JPanel();
+		table.setPreferredSize(new Dimension(600, 400));
+		table.setBorder(new EmptyBorder(10, 10, 10, 10));
+		table.add(information, BorderLayout.CENTER);
+
+		JLabel distance = new JLabel("Total Delivery Distance");
+		JLabel profit   = new JLabel("Total Profit Made");
+		logistics = new JTextField(10);
+		finances  = new JTextField(10);
+		
+		JPanel text = new JPanel(new GridLayout(2,2));
+		text.setBorder(new EmptyBorder(10, 10, 10, 10));
+		text.setPreferredSize(text.getPreferredSize());
+		text.add(distance);
+		text.add(logistics);
+		text.add(new JSeparator(SwingConstants.HORIZONTAL));
+		text.add(profit);
+		text.add(finances);
+
 		cards = new JPanel(new CardLayout());
 		cards.add(CLEAR, blank);
-		cards.add(LOAD, load);
+		cards.add(LOAD,  load);
+		cards.add(INFO,  table);
+		cards.add(CALCS, text);
 		
 		frame.getContentPane().add(cards);
 		frame.pack();
@@ -160,102 +187,83 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 	}
 	
 	private void displayInformation() {
-//		int customerSize = restaurant.getNumCustomerOrders();
-////		int pizzaSize    = restaurant.getNumPizzaOrders();
-//		String[][] customerData = new String[customerSize][];
-////		String[][] pizzaData    = new String[pizzaSize][];
-//		
-//		String[] customerHeaders = {
-//				"Customer Name",
-//				"Mobile Number",
-//				"Customer Type",
-//				"Coordinates",
-//				"Distance"
+		int customerSize = restaurant.getNumCustomerOrders();
+//		int pizzaSize    = restaurant.getNumPizzaOrders();
+		String[][] customerData = new String[customerSize][];
+//		String[][] pizzaData    = new String[pizzaSize][];
+		
+		String[] customerHeaders = {
+				"Customer Name",
+				"Mobile Number",
+				"Customer Type",
+				"Coordinates",
+				"Distance"
+		};
+		
+//		String[] pizzaHeaders    = {
+//				"Pizza Type",
+//				"Quantity",
+//				"Order Price",
+//				"Order Cost",
+//				"Order Profit"
 //		};
-//		
-////		String[] pizzaHeaders    = {
-////				"Pizza Type",
-////				"Quantity",
-////				"Order Price",
-////				"Order Cost",
-////				"Order Profit"
-////		};
-//		
+		
+		try {
+			for (int i = 0; i < customerSize; i++) {
+				Customer customer = restaurant.getCustomerByIndex(i);
+				customerData[i] = new String[] {
+						customer.getName(),
+						customer.getMobileNumber(),
+						customer.getCustomerType(),
+						customer.getLocationX() + ", " + customer.getLocationY(),
+						String.format("%.2f", customer.getDeliveryDistance())
+				};
+			}
+		} catch (CustomerException error) {
+			JOptionPane.showMessageDialog(this.getContentPane(), error.getMessage());
+		}
+		
 //		try {
-//			for (int i = 0; i < customerSize; i++) {
-//				Customer customer = restaurant.getCustomerByIndex(i);
-//				customerData[i] = new String[] {
-//						customer.getName(),
-//						customer.getMobileNumber(),
-//						customer.getCustomerType(),
-//						customer.getLocationX() + ", " + customer.getLocationY(),
-//						String.format("%.2f", customer.getDeliveryDistance())
+//			for (int i = 0; i < pizzaSize; i++) {
+//				Pizza pizza = restaurant.getPizzaByIndex(i);
+//				pizzaData[i] = new String[] {
+//						pizza.getPizzaType(),
+//						String.format("%d", pizza.getQuantity()),
+//						String.format("%.2f", pizza.getOrderPrice()),
+//						String.format("%.2f", pizza.getOrderCost()),
+//						String.format("%.2f", pizza.getOrderProfit())
 //				};
 //			}
-//		} catch (CustomerException error) {
-//			JOptionPane.showMessageDialog(frame, error.getMessage());
+//		} catch (PizzaException error) {
+//			JOptionPane.showMessageDialog(this.getContentPane(), error.getMessage());
 //		}
-//		
-////		try {
-////			for (int i = 0; i < pizzaSize; i++) {
-////				Pizza pizza = restaurant.getPizzaByIndex(i);
-////				pizzaData[i] = new String[] {
-////						pizza.getPizzaType(),
-////						String.format("%d", pizza.getQuantity()),
-////						String.format("%.2f", pizza.getOrderPrice()),
-////						String.format("%.2f", pizza.getOrderCost()),
-////						String.format("%.2f", pizza.getOrderProfit())
-////				};
-////			}
-////		} catch (PizzaException error) {
-////			JOptionPane.showMessageDialog(frame, error.getMessage());
-////		}
-//		
-////		DISPLAY TO BE REPLACED WITH
-////		JTable(Object[][] rowData, Object[] columnNames)
-//		
-//		eventLog.append(String.format("%-25s\t%s\t%s\t%s\t%s\n",
-//				customerHeaders[0],
-//				customerHeaders[1],
-//				customerHeaders[2],
-//				customerHeaders[3],
-//				customerHeaders[4]
-//		));
-//		
-//		for (int i = 0; i < customerSize; i++) {
-//			eventLog.append(String.format("%-25s\t%s\t%s\t%s\t%s\n",
-//					customerData[i][0],
-//					customerData[i][1],
-//					customerData[i][2],
-//					customerData[i][3],
-//					customerData[i][4]
-//			));
-//		}
-//
-////		eventLog.append(String.format("%s\t%s\t%s\t%s\t%s\n",
-////				pizzaHeaders[0],
-////				pizzaHeaders[1],
-////				pizzaHeaders[2],
-////				pizzaHeaders[3],
-////				pizzaHeaders[4]
-////		));
-//
-////		for (int i = 0; i < pizzaSize; i++) {
-////			eventLog.append(String.format("%s\t%s\t%s\t%s\t%s\n",
-////					pizzaData[i][0],
-////					pizzaData[i][1],
-////					pizzaData[i][2],
-////					pizzaData[i][3],
-////					pizzaData[i][4]
-////			));
-////		}
+		
+//		DISPLAY TO BE REPLACED WITH
+//		JTable(Object[][] rowData, Object[] columnNames)
+		
+		
+		setLayerVisibility(INFO);
 	}
 	
 	private void displayCalculations() {
-//		double distance = restaurant.getTotalDeliveryDistance();
-////		restaurant.getTotalProfit();
+		double distance = restaurant.getTotalDeliveryDistance();
+		double profit   = 0;//restaurant.getTotalProfit();
+		
+		
+//		///SEARCH FOR PIZZA TOPPING
+//		Iterator<PizzaTopping> iterator = toppings.iterator();
 //		
-//		eventLog.append(String.format("Total Delivery Distance: %.2f blocks\n", distance));
+//		while (iterator.hasNext()) {
+//			if (iterator.next().compareTo(topping)) {
+//				return true;
+//			}
+//		}
+//		
+//		return false;
+		
+		logistics.setText(String.format("%.2f blocks", distance));
+		finances.setText(String.format("$%.2f\n", profit));
+		setLayerVisibility(CALCS);
 	}
 
 	private void setLayerVisibility(String name) {
