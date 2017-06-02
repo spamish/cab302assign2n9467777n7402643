@@ -21,10 +21,8 @@ import asgn2Pizzas.Pizza;
  *
  */
 public class PizzaRestaurant {
-
 	private ArrayList<Customer> customers;
 	private ArrayList<Pizza> pizzas;
-
 	
 	/**
 	 * Creates an instance of the PizzaRestaurant and sets the customers and pizzas fields to
@@ -56,7 +54,9 @@ public class PizzaRestaurant {
 	 */
 	public boolean processLog(String filename) throws CustomerException, PizzaException, LogHandlerException {
 		customers = LogHandler.populateCustomerDataset(filename);
-		pizzas    = LogHandler.populatePizzaDataset(filename);
+//		pizzas    = LogHandler.populatePizzaDataset(filename);
+		
+//		if (customers.size() != pizzas.size()) throw new LogHandlerException("Mismatched customers and pizzas");
 		return true;
 	}
 
@@ -67,7 +67,7 @@ public class PizzaRestaurant {
 	 * @throws CustomerException if index is invalid.
 	 */
 	public Customer getCustomerByIndex(int index) throws CustomerException {
-		// TO DO
+		return customers.get(index);
 	}
 	
 	/**
@@ -77,7 +77,7 @@ public class PizzaRestaurant {
 	 * @throws PizzaException if index is invalid.
 	 */	
 	public Pizza getPizzaByIndex(int index) throws PizzaException {
-		// TO DO
+		return pizzas.get(index);
 	}
 	
 	/**
@@ -87,7 +87,7 @@ public class PizzaRestaurant {
 	 * @return the number of objects contained in the pizzas field.
 	 */
 	public int getNumPizzaOrders() {
-		// TO DO
+		return pizzas.size();
 	}
 
 	/**
@@ -97,7 +97,7 @@ public class PizzaRestaurant {
 	 * @return the number of objects contained in the customers field.
 	 */
 	public int getNumCustomerOrders() {
-		// TO DO
+		return customers.size();
 	}
 
 			
@@ -108,7 +108,8 @@ public class PizzaRestaurant {
 	 * @return the total delivery distance for all Customers objects in the customers field.
 	 */
 	public double getTotalDeliveryDistance() {
-		// TO DO
+		int siz = getNumPizzaOrders();
+		return 0.0;
 	}
 
 	/**
@@ -117,7 +118,7 @@ public class PizzaRestaurant {
 	 * @return the total profit for all of the Pizza objects in the pizzas field.
 	 */	
 	public double getTotalProfit() {
-		// TO DO
+		return 0.0;
 	}
 	
 	/**

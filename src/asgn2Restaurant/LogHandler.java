@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.time.LocalTime;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import asgn2Customers.Customer;
 import asgn2Customers.CustomerFactory;
@@ -98,41 +99,23 @@ public class LogHandler {
 	 * @throws LogHandlerException - If there was a problem parsing the line from the log file.
 	 */
 	public static Customer createCustomer(String line) throws CustomerException, LogHandlerException {
+		String name, mobileNumber, customerCode;
+		int locationX, locationY;
+		
 		String[] elements = line.split(",");
-		if (elements.length != 9) throw new LogHandlerException("Incompatible log line");
+		if (elements.length != 9) throw new LogHandlerException("Wrong number of elements in log line");
 		
-//		String name         = elements[2];
-//		String mobileNumber = elements[3];
-//		String customerCode = elements[4];
-//		int locationX       = Integer.parseInt(elements[5]);
-//		int locationY       = Integer.parseInt(elements[6]);
+		try {
+			name         = elements[2];
+			mobileNumber = elements[3];
+			customerCode = elements[4];
+			locationX    = Integer.parseInt(elements[5]);
+			locationY    = Integer.parseInt(elements[6]);
+		} catch ( NumberFormatException error) {
+			throw new LogHandlerException(error);
+		}
 		
-		LocalTime orderTime    = LocalTime.parse(elements[0]);
-		LocalTime deliveryTime = LocalTime.parse(elements[1]);
-		String name            = elements[2];
-		String mobileNumber    = elements[3];
-		String customerCode    = elements[4];
-		int locationX          = Integer.parseInt(elements[5]);
-		int locationY          = Integer.parseInt(elements[6]);
-		String pizzaCode       = elements[7];
-		int quantity           = Integer.parseInt(elements[8]);
-		
-		
-		
-		
-		System.out.println("'"
-				+ orderTime + "' '"
-				+ deliveryTime + "' '"
-				+ name + "' '"
-				+ mobileNumber + "' '"
-				+ customerCode + "' '"
-				+ locationX + "' '"
-				+ locationY + "' '"
-				+ pizzaCode + "' '"
-				+ quantity + "'");
-		
-//		return CustomerFactory.getCustomer(customerCode, name, mobileNumber, locationX, locationY);
-		return null;
+		return CustomerFactory.getCustomer(customerCode, name, mobileNumber, locationX, locationY);
 	}
 	
 	/**
@@ -146,11 +129,24 @@ public class LogHandler {
 	public static Pizza createPizza(String line) throws PizzaException, LogHandlerException {
 //		String[] elements = line.split("'");
 //		if (elements.length != 9) throw new LogHandlerException("Incompatible log line");
+
+//		LocalTime orderTime, deliveryTime;
+//		String name, mobileNumber, customerCode, pizzaCode;
+//		int locationX, locationY, quantity;
 		
-//		LocalTime orderTime    = LocalTime.parse(elements[0]);
-//		LocalTime deliveryTime = LocalTime.parse(elements[1]);
-//		String pizzaCode       = elements[7];
-//		int quantity           = Integer.parseInt(elements[8]);
+//		try {
+//			orderTime    = LocalTime.parse(elements[0]);
+//			deliveryTime = LocalTime.parse(elements[1]);
+//			name         = elements[2];
+//			mobileNumber = elements[3];
+//			customerCode = elements[4];
+//			locationX    = Integer.parseInt(elements[5]);
+//			locationY    = Integer.parseInt(elements[6]);
+//			pizzaCode    = elements[7];
+//			quantity     = Integer.parseInt(elements[8]);
+//		} catch (DateTimeParseException | NumberFormatException error) {
+//			throw new LogHandlerException(error);
+//		}
 		
 //		return PizzaFactory.getPizza(pizzaCode, quantity, orderTime, deliveryTime);
 	}

@@ -59,29 +59,21 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 		menuFile     = new JMenu("Files");
 		menuDisplay  = new JMenu("Displays");
 
-		JMenuItem itemLoad = new JMenuItem("Load");
-		itemLoad.addActionListener(this);
-		itemLoad.setActionCommand("load");
-		menuFile.add(itemLoad);
-		
-		JMenuItem itemReset = new JMenuItem("Reset");
-		itemReset.addActionListener(this);
-		itemReset.setActionCommand("reset");
-		menuFile.add(itemReset);
-		
-		JMenuItem itemInformation = new JMenuItem("Information");
-		itemInformation.addActionListener(this);
-		itemInformation.setActionCommand("info");
-		menuDisplay.add(itemInformation);
-		
-		JMenuItem itemCalculations = new JMenuItem("Calculations");
-		itemCalculations.addActionListener(this);
-		itemCalculations.setActionCommand("calc");
-		menuDisplay.add(itemCalculations);
+		createMenuItem(menuFile, "Load", "load");
+		createMenuItem(menuFile, "Reset", "reset");
+		createMenuItem(menuDisplay, "Information", "info");
+		createMenuItem(menuDisplay, "Calculations", "calcs");
 		
 		bar.add(menuFile);
 		bar.add(menuDisplay);
 		return bar;
+	}
+	
+	private void createMenuItem(JMenu menu, String title, String command) {
+		JMenuItem item = new JMenuItem(title);
+		item.addActionListener(this);
+		item.setActionCommand(command);
+		menu.add(item);
 	}
 
 	@Override
@@ -94,49 +86,69 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 		String move = event.getActionCommand();
 		
 		if (move == "load") {
-			JFileChooser chooser = new JFileChooser();
-			File file            = new File(System.getProperty("user.dir") + "/logs");
-			
-			chooser.setCurrentDirectory(file);
-			int response = chooser.showOpenDialog(frame);
-			
-			if (response == JFileChooser.APPROVE_OPTION) {
-				file = chooser.getSelectedFile();
-				
-				try {
-					restaurant.processLog(file.getPath());
-					
-					menuFile.getMenuComponent(0).setEnabled(false);
-					menuFile.getMenuComponent(1).setEnabled(true);
-					menuDisplay.getMenuComponent(0).setEnabled(true);
-					menuDisplay.getMenuComponent(1).setEnabled(true);
-					
-//					print loading confirmation to main window
-				} catch (CustomerException | PizzaException | LogHandlerException error) {
-					JOptionPane.showMessageDialog(frame, error.getMessage());
-				}
-	        }
+			loadFile();
 		} else if (move == "reset") {
-			menuFile.getMenuComponent(0).setEnabled(true);
-			menuFile.getMenuComponent(1).setEnabled(false);
-			menuDisplay.getMenuComponent(0).setEnabled(false);
-			menuDisplay.getMenuComponent(1).setEnabled(false);
-			
-			restaurant.resetDetails();
+			resetData();
 		} else if (move == "info") {
-//			int index;
-			
-			JOptionPane.showMessageDialog(frame, "Display customer and pizza information");
-			
-//			restaurant.getNumPizzaOrders();
-//			restaurant.getPizzaByIndex(index)
-//			restaurant.getNumCustomerOrders();
-//			restaurant.getCustomerByIndex(index);
-		} else if (move == "calc") {
-			JOptionPane.showMessageDialog(frame, "Display delivery and finacial information");
-			
-//			restaurant.getTotalDeliveryDistance();
-//			restaurant.getTotalProfit();
+			displayInformation();
+		} else if (move == "calcs") {
+			displayCalculations();
 		}
+	}
+
+	private void loadFile() {
+		JFileChooser chooser = new JFileChooser();
+		File file            = new File(System.getProperty("user.dir") + "/logs");
+		
+		chooser.setCurrentDirectory(file);
+		int response = chooser.showOpenDialog(frame);
+		
+		if (response == JFileChooser.APPROVE_OPTION) {
+			file = chooser.getSelectedFile();
+			
+			try {
+				// load log file into system
+				restaurant.processLog(file.getPath());
+				
+				menuFile.getMenuComponent(0).setEnabled(false);
+				menuFile.getMenuComponent(1).setEnabled(true);
+				menuDisplay.getMenuComponent(0).setEnabled(true);
+				menuDisplay.getMenuComponent(1).setEnabled(true);
+				
+//				print loading confirmation to main window
+			} catch (CustomerException | PizzaException | LogHandlerException error) {
+				// handle failed load
+				restaurant.resetDetails();
+				JOptionPane.showMessageDialog(frame, error.getMessage());
+			}
+        }
+	}
+
+	private void resetData() {
+		// clear system data
+		menuFile.getMenuComponent(0).setEnabled(true);
+		menuFile.getMenuComponent(1).setEnabled(false);
+		menuDisplay.getMenuComponent(0).setEnabled(false);
+		menuDisplay.getMenuComponent(1).setEnabled(false);
+		
+		restaurant.resetDetails();
+	}
+	
+	private void displayInformation() {
+//		int index;
+		
+		JOptionPane.showMessageDialog(frame, "Display customer and pizza information");
+		
+//		restaurant.getNumPizzaOrders();
+//		restaurant.getPizzaByIndex(index)
+//		restaurant.getNumCustomerOrders();
+//		restaurant.getCustomerByIndex(index);
+	}
+	
+	private void displayCalculations() {
+		JOptionPane.showMessageDialog(frame, "Display delivery and finacial information");
+		
+//		restaurant.getTotalDeliveryDistance();
+//		restaurant.getTotalProfit();
 	}
 }
